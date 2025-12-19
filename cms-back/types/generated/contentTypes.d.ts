@@ -467,6 +467,81 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiNavItemNavItem extends Struct.CollectionTypeSchema {
+  collectionName: 'nav_items';
+  info: {
+    displayName: '\u00CDtem de navegaci\u00F3n';
+    pluralName: 'nav-items';
+    singularName: 'nav-item';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    children: Schema.Attribute.Relation<'oneToMany', 'api::nav-item.nav-item'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    isVisible: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    label: Schema.Attribute.Text & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::nav-item.nav-item'
+    > &
+      Schema.Attribute.Private;
+    navigation: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::navigation.navigation'
+    >;
+    order: Schema.Attribute.Integer & Schema.Attribute.Required;
+    parent: Schema.Attribute.Relation<'manyToOne', 'api::nav-item.nav-item'>;
+    path: Schema.Attribute.Text & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    type: Schema.Attribute.Enumeration<['internal', 'external']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'internal'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiNavigationNavigation extends Struct.CollectionTypeSchema {
+  collectionName: 'navigations';
+  info: {
+    displayName: 'Navegaci\u00F3n';
+    pluralName: 'navigations';
+    singularName: 'navigation';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    code: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    item_de_navegacions: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::nav-item.nav-item'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::navigation.navigation'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.Text & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -978,6 +1053,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::nav-item.nav-item': ApiNavItemNavItem;
+      'api::navigation.navigation': ApiNavigationNavigation;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

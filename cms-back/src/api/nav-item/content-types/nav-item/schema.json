@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nav_items",
+  "info": {
+    "singularName": "nav-item",
+    "pluralName": "nav-items",
+    "displayName": "Ítem de navegación"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "label": {
+      "type": "text",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "required": true,
+      "default": "internal",
+      "enum": [
+        "internal",
+        "external"
+      ]
+    },
+    "path": {
+      "type": "text",
+      "required": true
+    },
+    "order": {
+      "type": "integer",
+      "required": true,
+      "unique": false
+    },
+    "isVisible": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "navigation": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::navigation.navigation",
+      "inversedBy": "item_de_navegacions"
+    },
+    "children": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::nav-item.nav-item",
+      "mappedBy": "parent"
+    },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::nav-item.nav-item",
+      "inversedBy": "children"
+    }
+  }
+}
