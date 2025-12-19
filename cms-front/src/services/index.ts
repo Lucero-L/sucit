@@ -2,3 +2,4 @@ export { PATH, ENDPOINT, getUserIdFromToken, isTokenExpired, type ApiResponse, t
 export { HttpClient, HttpError } from "./HttpClient";
 export { TokenService } from "./TokenService";
 export { AuthService } from "./AuthService";
+export { getMainMenu, getNavItemsByCode } from "./NavigationService";

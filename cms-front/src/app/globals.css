@@ -1,4 +1,6 @@
-@import "tailwindcss" prefix(tw);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* PrimeReact Theme */
 @import "primereact/resources/themes/lara-light-blue/theme.css";
@@ -10,6 +12,9 @@
   --background: #ffffff;
   --foreground: #171717;
   --font-sans: "Inter", sans-serif;
+  --nav-bg: #0d2137;
+  --nav-top-bg: #1e3a5f;
+  --nav-text: #7eb8da;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +28,61 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Custom Navbar Styles */
+.navbar-menu .p-menubar {
+  background: transparent !important;
+  border: none !important;
+}
+
+.navbar-menu .p-menubar-root-list {
+  background: transparent !important;
+  gap: 0.5rem;
+}
+
+.navbar-menu .p-menuitem-link {
+  background: transparent !important;
+  color: var(--nav-text) !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 0 !important;
+}
+
+.navbar-menu .p-menuitem-link:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.navbar-menu .p-menuitem-text {
+  color: var(--nav-text) !important;
+  font-weight: 500;
+}
+
+.navbar-menu .p-submenu-icon {
+  color: var(--nav-text) !important;
+}
+
+.navbar-menu .p-menuitem.p-menuitem-active > .p-menuitem-link {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Dropdown submenu */
+.p-menubar .p-submenu-list {
+  background: white !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+  min-width: 200px;
+}
+
+.p-menubar .p-submenu-list .p-menuitem-link {
+  color: #374151 !important;
+  padding: 0.75rem 1rem !important;
+}
+
+.p-menubar .p-submenu-list .p-menuitem-link:hover {
+  background: #f3f4f6 !important;
+}
+
+.p-menubar .p-submenu-list .p-menuitem-text {
+  color: #374151 !important;
 }
