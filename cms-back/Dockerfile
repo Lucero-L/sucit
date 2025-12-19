@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Dependencias primero (mejor cache)
 COPY package.json package-lock.json* ./
-RUN npm ci
+RUN npm install
 
 # Copia el resto del proyecto
 COPY . .
